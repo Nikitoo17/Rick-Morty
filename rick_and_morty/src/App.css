@@ -1,0 +1,7 @@
+.App {
+  text-align: center;
+}
+.Cards {
+  display: flex;
+  gap: 2rem;
+}
