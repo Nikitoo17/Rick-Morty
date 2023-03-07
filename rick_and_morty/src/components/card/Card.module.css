@@ -1,0 +1,47 @@
+.CardContainer {
+  border-radius: 15px;
+  width: 200px;
+  background-image: linear-gradient(to right, black, purple);
+  box-shadow: 0px 0px 15px white;
+}
+.CardImage {
+  background-size: 100%;
+  position: relative;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Button {
+  border-radius: 15px;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: red;
+  opacity: 0.9;
+  color: white;
+  width: 25px;
+  height: 25px;
+}
+.CardName {
+  background-color: black;
+  opacity: 0.7;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  font-size: 100%;
+}
+.Date {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  height: 40px;
+  color: white;
+  align-items: center;
+  font-size: 80%;
+}
