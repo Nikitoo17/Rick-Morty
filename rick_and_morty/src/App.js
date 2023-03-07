@@ -10,8 +10,33 @@ function App() {
         padding: "25px 25px",
         display: "flex",
         flexDirection: "column",
+        gap: "2em",
+        justifyContent: "center",
       }}
     >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            backgroundImage: `url(https://cdn.shopify.com/s/files/1/0346/8063/5529/collections/rick-morty-collection-banner_1400x.jpg?v=1590095280)`,
+            backgroundSize: "100%",
+            width: "50%",
+            height: "15vh",
+          }}
+        ></div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <SearchBar onSearch={(characterID) => window.alert(characterID)} />
+      </div>
       <div
         style={{
           padding: "0px",
@@ -24,14 +49,6 @@ function App() {
       ></div>
       <div>
         <Cards characters={characters} />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "10px",
-        }}
-      >
-        <SearchBar onSearch={(characterID) => window.alert(characterID)} />
       </div>
     </div>
   );
