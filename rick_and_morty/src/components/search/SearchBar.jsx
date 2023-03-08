@@ -4,7 +4,6 @@ export default function SearchBar(props) {
   const [character, setCharacter] = useState("");
 
   const handleSubmit = (event) => {
-    console.log(props);
     event.preventDefault();
     props.onSearch(character);
   };

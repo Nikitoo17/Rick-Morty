@@ -6,13 +6,25 @@ import { useState } from "react";
 function App() {
   const [characters, setCharacters] = useState([]);
 
+  function onDelete(id) {
+    setCharacters((characters) =>
+      characters.filter((character) => character.id !== id)
+    );
+  }
+
   function onSearch(id) {
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.id) {
-          setCharacters((characters) => [...characters, data]);
-          console.log(characters);
+          const duplicado = characters.some(
+            (character) => character.id === data.id
+          );
+          if (duplicado) {
+            window.alert("Este personaje ya ha sido agregado");
+          } else {
+            setCharacters((characters) => [...characters, data]);
+          }
         } else {
           window.alert("No hay personajes con ese ID");
         }
@@ -28,7 +40,7 @@ function App() {
         <NavBar value={onSearch} />
       </div>
       <div>
-        <Cards characters={characters} />
+        <Cards characters={characters} value={onDelete} />
       </div>
     </div>
   );

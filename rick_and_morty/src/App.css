@@ -12,9 +12,10 @@
 .Banner {
   border-radius: 15px;
   background-image: url(https://cdn.shopify.com/s/files/1/0346/8063/5529/collections/rick-morty-collection-banner_1400x.jpg?v=1590095280);
-  background-size: 100%;
+  background-size: cover;
+  background-position: center center;
   width: 50%;
-  height: 15vh;
+  height: 100px;
   box-shadow: 0px 0px 15px white;
 }
 .SearchBar {
