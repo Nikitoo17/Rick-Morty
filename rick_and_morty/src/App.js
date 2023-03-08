@@ -1,6 +1,5 @@
 import "./App.css";
 import Cards from "./components/cards/Cards.jsx";
-import SearchBar from "./components/search/SearchBar";
 import NavBar from "./components/nav/nav";
 import { useState } from "react";
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./SearchBar.module.css";
 export default function SearchBar(props) {
   const [character, setCharacter] = useState("");
 
@@ -13,9 +14,20 @@ export default function SearchBar(props) {
   };
 
   return (
-    <div>
-      <input type="text" onChange={handleInputChange} />
-      <button onClick={handleSubmit}>Agregar</button>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <input
+        className={styles.input}
+        type="text"
+        onChange={handleInputChange}
+      />
+      <button className={styles.add} onClick={handleSubmit}>
+        Agregar
+      </button>
     </div>
   );
 }
