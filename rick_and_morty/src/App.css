@@ -1,9 +1,23 @@
 .App {
-  text-align: center;
-}
-#Cards {
+  padding: 25px 25px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 2em;
   justify-content: center;
-  gap: 2rem;
+}
+.BannerContainer {
+  display: flex;
+  justify-content: center;
+}
+.Banner {
+  border-radius: 15px;
+  background-image: url(https://cdn.shopify.com/s/files/1/0346/8063/5529/collections/rick-morty-collection-banner_1400x.jpg?v=1590095280);
+  background-size: 100%;
+  width: 50%;
+  height: 15vh;
+  box-shadow: 0px 0px 15px white;
+}
+.SearchBar {
+  display: flex;
+  justify-content: center;
 }
