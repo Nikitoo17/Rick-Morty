@@ -1,7 +1,7 @@
 import SearchBar from "../search/SearchBar";
 import styles from "./nav.module.css";
 
-export default function NavBar(props) {
+export default function Nav({ onSearch }) {
   function randomNum() {
     const randomNumber = Math.floor(Math.random() * 826) + 1;
     return randomNumber;
@@ -11,12 +11,12 @@ export default function NavBar(props) {
       <button
         className={styles.random}
         onClick={() => {
-          props.value(randomNum());
+          onSearch(randomNum());
         }}
       >
         Random{" "}
       </button>
-      <SearchBar onSearch={props.value} />
+      <SearchBar onSearch={onSearch} />
     </div>
   );
 }

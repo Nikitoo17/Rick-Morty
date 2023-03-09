@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.css";
-export default function SearchBar(props) {
+export default function SearchBar({ onSearch }) {
   const [character, setCharacter] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSearch(character);
+    onSearch(character);
   };
 
   const handleInputChange = (event) => {
@@ -13,13 +13,7 @@ export default function SearchBar(props) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
+    <form onSubmit={handleSubmit} style={{}}>
       <input
         className={styles.input}
         type="text"

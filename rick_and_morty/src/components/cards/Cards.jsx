@@ -1,13 +1,12 @@
 import Card from "../card/Card";
 import styles from "./Cards.module.css";
 
-export default function Cards({ characters, value }) {
-  const asao = value;
+export default function Cards({ characters, onDelete }) {
   const personajes = characters.map(({ name, id, image, species, gender }) => (
     <Card
       key={id}
       id={id}
-      onDelete={asao}
+      onDelete={onDelete}
       name={name}
       image={image}
       species={species}
