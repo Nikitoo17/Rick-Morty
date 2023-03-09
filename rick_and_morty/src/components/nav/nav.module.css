@@ -1,0 +1,20 @@
+.random {
+  background-image: linear-gradient(to bottom, white, green, black);
+  height: 43px;
+  width: fit-content;
+  border: none;
+  font-family: "Creepster", cursive;
+  font-size: 2em;
+  margin: none;
+  padding: 3px 8px;
+  text-shadow: 0px 0px 5px white;
+  border-radius: 10px;
+  box-shadow: 8px 4px 10px white;
+}
+.random:hover {
+  background-image: linear-gradient(to bottom, black, green, white);
+}
+.nav {
+  display: flex;
+  gap: 1em;
+}
