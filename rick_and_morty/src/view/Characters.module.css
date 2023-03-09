@@ -1,0 +1,14 @@
+.main {
+  padding: 25px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+}
+
+.SearchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
