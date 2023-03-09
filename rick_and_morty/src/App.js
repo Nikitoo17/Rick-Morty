@@ -1,7 +1,9 @@
 import "./App.css";
-import Cards from "./components/cards/Cards.jsx";
-import NavBar from "./components/nav/nav";
+import NavBar from "./components/NavBar.jsx";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Characters from "./view/Characters";
+import About from "./view/About";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -32,16 +34,26 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
+      <div>
+        <NavBar />
+      </div>
       <div className="BannerContainer">
         <div className="Banner"></div>
       </div>
-      <div className="SearchBar">
-        <NavBar value={onSearch} />
-      </div>
-      <div>
-        <Cards characters={characters} value={onDelete} />
-      </div>
+      <Routes>
+        <Route
+          path="/characters"
+          element={
+            <Characters
+              characters={characters}
+              onDelete={onDelete}
+              onSearch={onSearch}
+            />
+          }
+        ></Route>
+        <Route path="/about" element={<About />}></Route>
+      </Routes>
     </div>
   );
 }
