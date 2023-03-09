@@ -13,7 +13,8 @@ export default function SearchBar(props) {
   };
 
   return (
-    <div
+    <form
+      onSubmit={handleSubmit}
       style={{
         display: "flex",
         alignItems: "center",
@@ -24,9 +25,7 @@ export default function SearchBar(props) {
         type="text"
         onChange={handleInputChange}
       />
-      <button className={styles.add} onClick={handleSubmit}>
-        Agregar
-      </button>
-    </div>
+      <button className={styles.add}>Agregar</button>
+    </form>
   );
 }
