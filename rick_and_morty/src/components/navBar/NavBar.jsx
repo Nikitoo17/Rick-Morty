@@ -1,16 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 function Navbar() {
   return (
     <nav>
-      <ul
-        style={{
-          display: "flex",
-          gap: "2em",
-          justifyContent: "center",
-        }}
-      >
+      <ul className={styles.main}>
         <li>
           <Link to="/home">Home</Link>
         </li>
