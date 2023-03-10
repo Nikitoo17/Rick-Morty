@@ -1,9 +1,10 @@
 import "./App.css";
-import NavBar from "./components/NavBar.jsx";
+import NavBar from "./components/navBar/NavBar.jsx";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Characters from "./view/Characters";
 import About from "./view/About";
+import Detail from "./view/Detail.jsx";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -53,6 +54,7 @@ function App() {
           }
         ></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/detail/:detailID" element={<Detail />} />
       </Routes>
     </div>
   );
