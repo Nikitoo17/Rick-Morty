@@ -1,10 +1,11 @@
 import "./App.css";
 import NavBar from "./components/navBar/NavBar.jsx";
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Characters from "./view/Characters";
 import About from "./view/About";
 import Detail from "./view/Detail.jsx";
+import Landing from "./view/Landing";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -34,6 +35,27 @@ function App() {
       });
   }
 
+  const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+  const username = "nicofadel17@gmail.com";
+  const password = "cocacola17";
+
+  function login(userData) {
+    if (userData.password === password && userData.username === username) {
+      setAccess(true);
+      navigate("/characters");
+    }
+  }
+
+  function logOut() {
+    setAccess(false);
+    navigate("/");
+  }
+
+  useEffect(() => {
+    !access && navigate("/");
+  }, [access]);
+
   return (
     <div>
       <div>
@@ -43,6 +65,7 @@ function App() {
         <div className="Banner"></div>
       </div>
       <Routes>
+        <Route path="/" element={<Landing login={login} />} />
         <Route
           path="/characters"
           element={
@@ -50,10 +73,11 @@ function App() {
               characters={characters}
               onDelete={onDelete}
               onSearch={onSearch}
+              logout={logOut}
             />
           }
-        ></Route>
-        <Route path="/about" element={<About />}></Route>
+        />
+        <Route path="/about" element={<About />} />
         <Route path="/detail/:detailID" element={<Detail />} />
       </Routes>
     </div>
