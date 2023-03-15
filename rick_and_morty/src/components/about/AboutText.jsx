@@ -13,7 +13,7 @@ export default function AboutText() {
         Espero que disfrutes usando esta aplicación tanto como yo disfruté
         desarrollándola.
       </p>
-      <Link to="/">Home</Link>
+      <Link to="/characters">Home</Link>
     </div>
   );
 }
