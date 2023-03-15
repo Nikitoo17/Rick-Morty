@@ -1,5 +1,5 @@
-import Cards from "../components/cards/Cards.jsx";
-import Nav from "../components/nav/Nav.jsx";
+import Cards from "../../components/cards/Cards.jsx";
+import Nav from "../../components/nav/Nav.jsx";
 import styles from "./Characters.module.css";
 
 export default function Characters({ characters, onDelete, onSearch, logout }) {
