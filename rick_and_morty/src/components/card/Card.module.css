@@ -75,3 +75,18 @@
   padding: 0px 0px;
   box-shadow: 1px 1px 10px black;
 }
+.fav {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 1.3em;
+  border: none;
+  font-family: "Creepster", cursive;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 10px;
+  margin: 0px 0px;
+  padding: 0px 0px;
+  box-shadow: 1px 1px 10px black;
+}
