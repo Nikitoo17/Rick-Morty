@@ -2,10 +2,11 @@ import "./App.css";
 import NavBar from "./components/navBar/NavBar.jsx";
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Characters from "./view/Characters";
+import Characters from "./view/Characters/Characters";
 import About from "./view/About";
 import Detail from "./view/Detail.jsx";
 import Landing from "./view/Landing";
+import Favorites from "./view/Favorites/Favorites";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -54,7 +55,7 @@ function App() {
 
   useEffect(() => {
     !access && navigate("/");
-  }, [access]);
+  }, [access, navigate]);
 
   return (
     <div>
@@ -79,6 +80,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:detailID" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div>
   );

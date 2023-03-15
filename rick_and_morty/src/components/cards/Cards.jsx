@@ -11,6 +11,7 @@ export default function Cards({ characters, onDelete }) {
       image={image}
       species={species}
       gender={gender}
+      card={true}
     />
   ));
   return <div className={styles.Cards}>{personajes}</div>;
