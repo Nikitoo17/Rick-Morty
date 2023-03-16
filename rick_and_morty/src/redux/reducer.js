@@ -24,13 +24,20 @@ export default function rootReducer(state = initialState, action) {
         ),
       };
     case FILTER_CARD:
-      const filter = state.allCharacters.filter(
-        (char) => char.gender === action.payload
-      );
-      return {
-        ...state,
-        myFavorites: filter,
-      };
+      if (action.payload === "All") {
+        return {
+          ...state,
+          myFavorites: state.allCharacters,
+        };
+      } else {
+        const filter = state.allCharacters.filter(
+          (char) => char.gender === action.payload
+        );
+        return {
+          ...state,
+          myFavorites: filter,
+        };
+      }
     case ORDER_CARDS:
       let sort = [...state.myFavorites];
       if (action.payload === "Ascendente") {
@@ -38,10 +45,15 @@ export default function rootReducer(state = initialState, action) {
           ...state,
           myFavorites: sort.sort((a, b) => a.id - b.id),
         };
-      } else {
+      } else if (action.payload === "Descendente") {
         return {
           ...state,
           myFavorites: sort.sort((a, b) => b.id - a.id),
+        };
+      } else {
+        return {
+          ...state,
+          myFavorites: sort,
         };
       }
 

@@ -28,10 +28,12 @@ export default function Favorite() {
     <div className={styles.main}>
       <div>
         <select name="Order" onChange={handleChangeOrder}>
+          <option value="All">ORDER</option>
           <option value="Ascendente">Ascendente</option>
           <option value="Descendente">Descendente</option>
         </select>
         <select name="Gender" onChange={handleChangeFilter}>
+          <option value="All">ALL GENDER</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Genderless">Genderless</option>

@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Characters from "./view/Characters/Characters";
 import About from "./view/About";
 import Detail from "./view/Detail.jsx";
-import Landing from "./view/Landing";
+import Landing from "./view/Landing/Landing";
 import Favorites from "./view/Favorites/Favorites";
 
 function App() {
@@ -59,12 +59,18 @@ function App() {
 
   return (
     <div>
-      <div>
-        <NavBar />
-      </div>
-      <div className="BannerContainer">
-        <div className="Banner"></div>
-      </div>
+      {access ? (
+        <>
+          <div>
+            <NavBar />
+          </div>
+          <div className="BannerContainer">
+            <div className="Banner"></div>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
       <Routes>
         <Route path="/" element={<Landing login={login} />} />
         <Route
