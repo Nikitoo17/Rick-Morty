@@ -1,4 +1,4 @@
-## HW 12: React-Redux | Integración
+## HW 13: React-Hooks | Integración
 
 ## **Duración estimada 🕒**
 
@@ -12,30 +12,15 @@
 
 ## **INTRO**
 
-En la integración de hoy crearemos un espacio en el que podremos guardar a nuestros personajes favoritos. ¡Podremos agregarlos y eliminarlos!
+En esta homework crearemos dos cosas que harán más completa nuestra aplicación: 😄
 
-Para esto:
+- Por un lado, haremos un **filtrado** para nuestros personajes favoritos. Vamos a filtrar todos los personajes por su género. En total hay cuatro géneros:
 
-- ❤️ Fav button: nuestras Cards tendrán un botón para agregar/eliminar de favoritos.
-- 👀 Vista nueva: crearemos una nueva vista en la que se muestre específicamente todos nuestros personajes favoritos.
-
-<br />
-
----
-
-### **COMENCEMOS**
-
-Para comenzar, en tu terminal dirígete a la carpeta raíz de tu proyecto. Allí tendrás que instalar las siguientes dependencias:
-
-```bash
-npm i redux react-redux redux-thunk
+```javascript
+["Male", "Female", "unknown", "Genderless"];
 ```
 
-Una vez instaladas, a la altura de la carpeta "_components_" (es decir, que sea una carpeta hermana), crea una nueva carpeta llamada "**redux**". Dentro de ella crea los archivos `actions.js`, `store.js` y `reducer.js`.
-
-Dentro del archivo `store.js`, haz la configuración del store. Una vez configurado, deberás importarlo en tu archivo `index.js` junto con el Provider, y configurarlo en el wraper finalmente.
-
-> **NOTA:** puedes guiarte por cómo lo tienes hecho en la homework anterior. Ten en cuenta que el reducer lo crearás en el siguiente paso.
+- Por otro lado, haremos un **ordenamiento** también para nuestros personajes favoritos. Vamos a ordenar todos los personajes por su id (de mayor a menor y viceversa).
 
 <br />
 
@@ -43,21 +28,23 @@ Dentro del archivo `store.js`, haz la configuración del store. Una vez configur
 
 ## **👩‍💻 EJERCICIO 1**
 
-### **REDUCER**
+### **ACTIONS**
 
-Dirígete al archivo en el que se encuentra tu **reducer**. Allí deberás:
+🔹 Dirígete al archivo en el que se encuentran tus **actions**.
 
-1. Crear un _**initialState**_ con una propiedad llamada "**myFavorites**". Esta propiedad será un array vacío.
+🔹 Lo que hay que hacer:
 
-2. Luego deberás crear tu reducer. Recuerda que este recibe dos parámetros, y dentro de él hay un switch.
+1. Crear una action-creator con el nombre "**_filterCards_**", esta action-creator debe:
 
-> **NOTA:** ten en cuenta el modo en el que lo exportas, y cómo lo importas dentro de tu store.
+   a. Recibir por parámetro un **gender**.
 
-3. Dentro del switch de tu reducer, crea un nuevo caso en el que podrás agregar el personaje que recibes por payload a tu estado "_myFavorites_".
+   b. Retornar un **_type_** llamado "**FILTER**" y un **_payload_** donde su valor sea el parámetro recibido en la action.
 
-4. Crea un nuevo caso en el elimines el personaje que recibes por payload de tu estado inicial. Deberás filtrar el personaje a partir de su **ID**.
+2. Crear una segunda action-creator con el nombre "**_orderCards_**". Esta action-creator debe:
 
-5. No te olvides de tu caso _**default**_.
+   a. Recibir por parámetro un **id**.
+
+   b. Retornar un **_type_** llamado "**ORDER**", y un **_payload_** donde su valor sea el parámetro recibido en la action.
 
 <br />
 
@@ -65,15 +52,53 @@ Dirígete al archivo en el que se encuentra tu **reducer**. Allí deberás:
 
 ## **👩‍💻 EJERCICIO 2**
 
-### **ACTIONS**
+### **REDUCER**
 
-Crea dos _actions-creators_.
+🔹 Seguiremos trabajando nuestro reducer, el objetivo de este ejercicio es añadir una nueva propiedad de estado y con la propiedad que ya teníamos creada de la homework anterior (React-Redux), lograremos paso a paso filtrar y ordenar nuestros personajes favoritos.
 
-- Una que sea para agregar personajes a tu lista de favoritos. Recibe por parámetro el personaje.
+🔹 Lo que hay que hacer:
 
-- Otro que sea para eliminar un personaje de la lista de favoritos. Recibe por parámetro el id del personaje.
+1. Dirígete al archivo en el que se encuentra tu reducer:
 
-> **NOTA:** no olvides que el nombre que asignes en la propiedad "TYPE" de tu acción, debe coincidir exactamente con el nombre de los casos que hayas asignado en tu reducer.
+   a. Crea una nueva propiedad de estado llamada _**allCharacters**_ a nuestro estado global **_initialState_**.
+
+   b. **\_allCharacters** debe ser un arreglo vacío.
+
+2. Modifiquemos el caso **ADD_FAV**:
+
+   a. Actualmente tenemos en el return de este case:
+
+   - El state.
+
+   - Una propiedad llamada _**myFavorites**_ donde su valor es una copia del estado _**myFavorites**_ y el payload.
+
+   ♦ Lo que debes es reemplazar la copia de _**myFavorites**_ por una copia del estado creado en el punto anterior: _**allCharacters**_.
+
+   b. Debajo de la propiedad _**myFavorites**_ agrega la propiedad de estado _**allCharacters**_ donde su valor sea una copia de este estado y el payload.
+
+3. Crea un nuevo caso con el nombre "_FILTER_", en él vamos a filtrar nuestros personajes favoritos para ello debes hacer lo siguiente:
+
+   a. Mediante destructuring trae la propiedad de estado "**_allCharacters_**".
+
+   b. Filtra aquellos personajes que tengan el mismo género que recibes por payload.
+
+   c. Retorna tu estado global y la propiedad **_myFavorites_** ésta última debe ser igual al filtrado que haz hecho en el punto b.
+
+   > **Hint**: Recuerda cuando desarrollamos la homework 08-React-Estado-LifeCycle 01-Exercises: en Zoo app, creamos también copias de estado 😉.
+
+4. Crea un caso con el nombre "_ORDER_", en él vamos a ordenar nuestros personajes favoritos de forma ascendente y descendente, para ello debes hacer los siguientes pasos:
+
+   a. Mediante destructuring trae la propiedad de estado "**_allCharacters_**".
+
+   b. Utilizar el método **sort** para ordenar tus personajes de acuerdo a su ID.
+
+   c. Si el _payload_ es igual a "**Ascendente**", los personajes deben ordenarse de menor a mayor.
+
+   d. Si el _payload_ es "**Descendente**, los personajes deben ordenarse de mayor a menor.
+
+   e. Retornar tu estado global y la propiedad **_myFavorites_**, ésta última debe ser igual al ordenamiento que acabas de hacer.
+
+> **NOTA:** investiga en la web sobre cómo funciona el método sort.
 
 <br />
 
@@ -81,89 +106,52 @@ Crea dos _actions-creators_.
 
 ## **👩‍💻 EJERCICIO 3**
 
-### **FAV BUTTON**
+### **Filtros y ordenamientos en el componente Favorites**
 
-Ahora crearemos un botón para agregar y eliminar de favoritos! Para esto:
+🔹 Dirígete al archivo en el que se encuentra tu componente **Favorites**.
 
-1. Dirígete al componente `Card`. Aquí deberás crear una función **mapDispatchToProps** que contenga dos funciones: Una para agregar tu personaje favorito, y otra para eliminarlo. Ten en cuenta que deberás importar las _**actions**_ que ya creaste.
+🔹 Lo que hay que hacer:
 
-2. Luego conecta esta función con tu componente, y recibe ambas funciones despachadoras por props.
+1. Crea una etiqueta `div`.
 
-3. Ahora crea un estado local en tu componente que se llame **isFav**, e inicialízalo en `false`.
+2. Dentro del div crea una etiqueta `select` con el atributo **name**, para el ordenamiento, dentro de esta etiqueta:
 
-4. Crea una función en el cuerpo del componente llamada **handleFavorite**. Esta función estará dividida en dos partes:
+   a. Crea una etiqueta `option` con el atributo **value**, el valor del atributo debe ser "_Ascendente_" y su texto puede ser _Ascendente_.
 
-   - Si el estado _**isFav**_ es `true`, entonces settea ese estado en false, y despacha la función **deleteFavorite** que recibiste por props pasándole el **ID** del personaje como argumento.
-   - Si el estado _**isFav**_ es `false`, entonces settea ese estado en true, y despacha la función **addFavorite** que recibiste por props, pasándole `props` como argumento.
+   b. Crea una segunda etiqueta **option** con el atributo **value**, el valor del atributo debe ser "_Descendente_" y su texto puede ser _Descendente_.
 
-5. Ahora te ayudaremos a crear un renderizado condicional. Si tu estado local `isFav` es true, entonces se mostrará un botón. Si es false, se mostrará otro botón. Para esto, copia y pega el siguiente código al comienzo del renderizado de tu componente (no te olvides de darle estilos).
+   Por ejemplo:
 
-```javascript
-{
-  isFav ? (
-    <button onClick={handleFavorite}>❤️</button>
-  ) : (
-    <button onClick={handleFavorite}>🤍</button>
-  );
-}
-```
+   ```html
+   <option value="Ascendente">Ascendente</option>
+   ```
 
-En este punto debería quedarte algo como esto:
+3. Crea una segunda etiqueta **select** con el atributo name, para el filtrado, dentro de esta etiqueta:
 
-<img src="./img/favButton.gif" alt="" />
+   a. Crea 4 etiquetas **option** cada una con su atributo **value** con los siguientes valores: **Male**, **Female**, **Genderless** y **unknown**. Cada texto de cada etiqueta option puede ser igual a cada valor.
 
-6. Una vez hecho esto, nos tenemos que asegurar que el status de nuestro estado local se mantenga aunque nos vayamos y volvamos al componente. Para esto vamos a agregar en este componete una función **mapStateToProps**. Esa función debe traer nuestro estado global **myFavorites**. Recíbelo por `props` dentro de tu componente.
+   ```html
+   <option value="Male">Male</option>
+   ```
 
-7. Este `useEffect` comprobará si el personaje que contiene esta `Card` ya está dentro de tus favoritos. En ese caso setteará el estado **isFav** en true. Cópialo y pégalo dentro de tu componente (no te olvides de importarlo).
+4. Crea una función que reciba como parámetro un evento y despache la acción "**orderCards**" con el hook **useDispatch**; la acción recibe como argumento `e.target.value`.
 
-```javascript
-useEffect(() => {
-  myFavorites.forEach((fav) => {
-    if (fav.id === props.id) {
-      setIsFav(true);
-    }
-  });
-}, [myFavorites]);
-```
+5. Crea una función que reciba como parámetro un evento y despache la acción "**filterCards**" con el hook **useDispatch**; la acción recibe como argumento **e.target.value**.
 
-> **DESAFÍO:** te desafiamos a que reconstruyas ese useEffect, pero utilizando un **bucle For** en lugar de un **.forEach()**.
+6. Agrega el atributo `onChange` a las etiquetas **select** y que su valor sea el nombre de la función correspondiente a cada select.
 
 <br />
 
 ---
 
-## **👩‍💻 EJERCICIO 4**
+## **👩‍💻 Extra Credit**
 
-### **COMPONENTE DE FAVORITOS**
-
-Dirígete a tu carpeta de componentes, y crea allí dentro una carpeta que contenga un archivo `Favorites.jsx` y otro `favorites.css`.
-
-1. Crea una ruta en el archivo `App.js` para mostrar este componente. La ruta se puede llamar **/favorites**. También crea un botón en tu `Navbar` que te redirija a esta ruta, y otro que te devuelva a tu `Home`.
-
-2. Dentro de este componente crea una función **mapStateToProps**. Esta función debe traer nuestro estado global _**myFavorites**_ a este componente. Luego recíbelo por props.
-
-3. Una vez que tengas la lista de tus personajes favoritos dentro de tu componente, deberás mappearlo (recorrerlo) y re-renderizar un `<div>` con información del personaje.
-
-> **NOTA:** no te olvides de darle estilos al componente.
+Agrega una opción adicional en el select del filtro para que muestre todos los personajes. Desarrolla la lógica para que ello ocurra.
 
 <br />
 
 ---
 
-### **¡LISTO! YA FUNCIONA TODO**
+A esta altura, tu filtro y ordenamiento debería estar funcionando de la siguiente manera!
 
-Todo el trabajo que hiciste en esta integración debería darte un resultado y funcionamiento similar a este:
-
-<img src="./img/favDemostration.gif" alt="" />
-
-<br />
-
----
-
-## **📌 EJERCICIO EXTRA**
-
-### **¡Ahora te proponemos dos desafíos!**
-
-**1.** Si revisas, esta aplicación tiene un pequeño bug que tendrás que resolver... Cuando presionas el ❤️ de una de las Cards, el personaje aparece en la vista de "**Favoritos**". Pero si luego eliminas el personaje, este aún permanece en esta vista. Busca la manera para que cuando elimines un personaje, también se elimine de "**Favoritos**" (si es que está allí).
-
-**2.** Te animamos a que crees, dentro de esta misma aplicación, una nueva vista que sea tu "**PORTFOLIO**". Aquí podrás agregar/eliminar/editar tus proyectos construidos durante el bootcamp en Henry!
+<img src="./img/example.gif" alt="" />

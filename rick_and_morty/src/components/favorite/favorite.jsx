@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./favorite.module.css";
 import Card from "../card/Card";
+import { filterCard, orderCards } from "../../redux/actions";
 export default function Favorite() {
   const Favorites = useSelector((state) => state.myFavorites);
   const personajes = Favorites.map(({ name, id, image, species, gender }) => (
@@ -13,5 +14,31 @@ export default function Favorite() {
       gender={gender}
     />
   ));
-  return <div className={styles.main}>{personajes}</div>;
+
+  const dispatch = useDispatch();
+
+  const handleChangeOrder = (event) => {
+    dispatch(orderCards(event.target.value));
+  };
+  const handleChangeFilter = (event) => {
+    dispatch(filterCard(event.target.value));
+  };
+
+  return (
+    <div className={styles.main}>
+      <div>
+        <select name="Order" onChange={handleChangeOrder}>
+          <option value="Ascendente">Ascendente</option>
+          <option value="Descendente">Descendente</option>
+        </select>
+        <select name="Gender" onChange={handleChangeFilter}>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Genderless">Genderless</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+      </div>
+      <div className={styles.characters}>{personajes}</div>
+    </div>
+  );
 }

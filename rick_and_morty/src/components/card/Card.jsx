@@ -1,46 +1,37 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { /*connect,*/ useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../../redux/actions";
 import { useState, useEffect } from "react";
 
-function Card({
-  name,
-  species,
-  gender,
-  image,
-  onDelete,
-  id,
-  card,
-  addFavorite,
-  removeFavorite,
-  myFavorites,
-}) {
+function Card({ name, species, gender, image, onDelete, id, card }) {
   const [isFav, setIsFav] = useState(false);
+  const Favorites = useSelector((state) => state.myFavorites);
+  const dispatch = useDispatch();
   const handleFavorite = () => {
     if (isFav) {
       setIsFav(false);
-      removeFavorite({ id });
+      dispatch(removeFavorite({ id }));
     } else {
       setIsFav(true);
-      addFavorite({
-        name,
-        species,
-        gender,
-        image,
-        onDelete,
-        id,
-      });
+      dispatch(
+        addFavorite({
+          name,
+          species,
+          gender,
+          image,
+          id,
+        })
+      );
     }
   };
 
   useEffect(() => {
-    myFavorites.forEach((fav) => {
+    Favorites.forEach((fav) => {
       if (fav.id === id) {
         setIsFav(true);
       }
     });
-    console.log(myFavorites);
     // eslint-disable-next-line
   }, [isFav]);
 
@@ -79,16 +70,17 @@ function Card({
     </div>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addFavorite: (character) => dispatch(addFavorite(character)),
-    removeFavorite: (id) => dispatch(removeFavorite(id)),
-  };
-};
-const mapStateToProps = (state) => {
-  return {
-    myFavorites: state.myFavorites,
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addFavorite: (character) => dispatch(addFavorite(character)),
+//     removeFavorite: (id) => dispatch(removeFavorite(id)),
+//   };
+// };
+// const mapStateToProps = (state) => {
+//   return {
+//     myFavorites: state.myFavorites,
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+//export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default Card;
