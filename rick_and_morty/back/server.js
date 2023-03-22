@@ -1,29 +1,18 @@
 const http = require("http");
-const data = require("./utils/data");
+const { getCharById } = require("./controllers/getCharById");
 
 const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  const { url } = req;
-
-  if (url.includes("rickandmorty/character/")) {
-    const id = url.split("/").pop();
-
-    const character = data.find((char) => char.id == id);
-
-    if (character) {
-      res.writeHeader(200, "Content-Type", "application/json");
-      return res.end(JSON.stringify(character));
-    } else {
-      res.writeHeader(404, "Content-Type", "application/json");
-      return res.end(JSON.stringify({ error: "Personaje no encontrado" }));
-    }
+  if (req.url.includes("rickandmorty/character/")) {
+    const id = req.url.split("/").pop();
+    getCharById(res, id);
   } else {
-    res.writeHeader(400, "Content-Type", "application/json");
-    res.end("URL inválida");
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("Not Found");
   }
 });
 
 server.listen(3001, () => {
-  console.log("Servidor escuchando en puerto 3001");
+  console.log("Servidor escuchando en el puerto 3001");
 });
