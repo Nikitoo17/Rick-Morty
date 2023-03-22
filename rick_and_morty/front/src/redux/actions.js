@@ -2,6 +2,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const FILTER_CARD = "FILTER_CARD";
 export const ORDER_CARDS = "ORDER_CARDS";
+//
 export const addFavorite = (personaje) => {
   return {
     type: ADD_FAVORITE,
