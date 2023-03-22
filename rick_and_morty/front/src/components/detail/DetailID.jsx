@@ -7,7 +7,7 @@ export default function DetailID() {
   const { detailID } = useParams();
 
   useEffect(() => {
-    fetch(` http://localhost:3001/rickandmorty/character/${detailID}`)
+    fetch(` http://localhost:3001/rickandmorty/detail/${detailID}`)
       .then((response) => response.json())
       .then((data) => setCharacter(data));
   }, [detailID]);
