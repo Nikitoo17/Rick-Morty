@@ -29,4 +29,4 @@ const characters = [
   },
 ];
 
-export default characters;
+module.exports = characters;

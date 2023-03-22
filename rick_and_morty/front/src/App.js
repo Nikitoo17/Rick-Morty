@@ -18,9 +18,10 @@ function App() {
   }
 
   function onSearch(id) {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+    fetch(` http://localhost:3001/rickandmorty/character/${id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.id) {
           const duplicado = characters.some(
             (character) => character.id === data.id
