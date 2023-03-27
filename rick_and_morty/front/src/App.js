@@ -51,6 +51,7 @@ function App() {
 
   function logOut() {
     setAccess(false);
+    console.log(access);
     navigate("/");
   }
 
