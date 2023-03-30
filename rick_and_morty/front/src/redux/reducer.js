@@ -11,11 +11,17 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_FAVORITE:
-      return {
-        ...state,
-        myFavorites: [...state.allCharacters, action.payload],
-        allCharacters: [...state.allCharacters, action.payload],
-      };
+      const favExist = action.payload.id;
+      const exists = state.myFavorites.find((fav) => fav === favExist);
+      if (!exists) {
+        return {
+          ...state,
+          myFavorites: [...state.myFavorites, action.payload],
+          allCharacters: [...state.allCharacters, action.payload],
+        };
+      } else {
+        return state;
+      }
     case REMOVE_FAVORITE:
       return {
         ...state,
